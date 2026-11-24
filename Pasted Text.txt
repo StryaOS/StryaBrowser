@@ -1,0 +1,2 @@
+/home/kame/StryaBrowser/Strya3/StryaBrowser_0.3.0_patch/StryaBrowser_0.3.0_patch (3)/StryaBrowser_0.3.0/main.js
+/home/kame/StryaBrowser/Strya3/StryaBrowser_0.3.0_patch/StryaBrowser_0.3.0_patch (3)/StryaBrowser_0.3.0/preload.js

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Strya Browser</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="browserUI" class="hidden">
+  <header id="titlebar">
+    <div class="brand">
+      <span class="logo">S</span>
+      <span class="brand-name">　>
+    </div>
+    <div id="tabs"></div>
+    <button id="newTab" class="title-button" title="新しいタブ">＋</button>
+    <div class="window-controls">
+      <button id="winMin" title="最小化">－</button>
+      <button id="winMax" title="最大化">□</button>
+      <button id="winClose" class="close-button" title="閉じる">×</button>
+    </div>
+  </header>
+
+  <nav id="toolbar">
+    <button id="sidebarToggle" class="icon-button" title="サイドバー">☰</button>
+    <button id="back" class="icon-button" title="戻る">◁</button>
+    <button id="forward" class="icon-button" title="進む">▷</button>
+    <button id="reload" class="icon-button" title="再読み込み">↻</button>
+    <button id="home" class="icon-button" title="ホーム">⌂</button>
+
+    <div id="address-wrap">
+      <span class="address-lock">⌑</span>
+      <input id="address" type="text" placeholder="検索またはURLを入力">
+      <button id="bookmark" title="ブックマーク">☆</button>
+      <button id="go" title="移動">→</button>
+    </div>
+
+    <button id="findToggle" class="icon-button" title="ページ内検索">⌕</button>
+    <button id="menu" class="icon-button" title="メニュー">⋮</button>
+  </nav>
+
+  <div id="findbar">
+    <input id="findInput" placeholder="ページ内を検索">
+    <button id="findClose" class="icon-button">×</button>
+  </div>
+
+  <div id="surface">
+    <aside id="sidebar">
+      <div class="sidebar-section">
+        <button data-panel="home" class="sidebar-item">⌂ <span>ホーム</span></button>
+        <button data-panel="bookmarks" class="sidebar-item">☆ <span>ブックマーク</span></button>
+        <button data-panel="history" class="sidebar-item">◷ <span>履歴</span></button>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-section">
+        <button data-panel="downloads" class="sidebar-item">↓ <span>ダウンロード</span></button>
+        <button data-panel="cookies" class="sidebar-item">◉ <span>Cookie</span></button>
+        <button data-panel="passmenu" class="sidebar-item">🗝 <span>PassMenu</span></button>
+        <button data-panel="permissions" class="sidebar-item">◇ <span>権限</span></button>
+      </div>
+
+      <div class="sidebar-bottom">
+        <button data-tool="settings" class="sidebar-item">⚙ <span>設定</span></button>
+      </div>
+    </aside>
+
+    <main id="contentArea">
+      <div id="startpage"></div>
+      <section id="panel">
+        <div id="panelContent"></div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- Settings -->
+<div id="settingsUI" class="hidden">
+  <header class="settings-titlebar">
+    <div class="brand">
+      <span class="logo">S</span>
+      <span class="brand-name">Strya Browser 設定</span>
+    </div>
+    <div class="window-controls">
+      <button id="settingsMin">－</button>
+      <button id="settingsMax">□</button>
+      <button id="settingsClose" class="close-button">×</button>
+    </div>
+  </header>
+
+  <div class="settings-layout">
+    <aside class="settings-nav">
+      <button data-settings="general" class="selected">一般</button>
+      <button data-settings="appearance">外観</button>
+      <button data-settings="tweak">UI Tweak</button>
+      <button data-settings="privacy">プライバシー</button>
+      <button data-settings="erase">データ削除</button>
+      <button data-settings="about">Stryaについて</button>
+    </aside>
+
+    <main class="settings-main">
+      <section id="settings-general" class="settings-page active">
+        <h1>一般</h1>
+        <div class="settings-card">
+          <h3>起動時のページ</h3>
+          <input id="settingHome" type="text" placeholder="about:blank">
+          <p class="muted">起動時に表示するページを設定します。</p>
+        </div>
+        <div class="settings-card">
+          <h3>検索エンジン</h3>
+          <select id="settingSearch">
+            <option value="google">Google</option>
+            <option value="bing">Bing</option>
+            <option value="duckduckgo">DuckDuckGo</option>
+          </select>
+        </div>
+        <div class="settings-card">
+          <h3>ツール</h3>
+          <button id="settingNewTab" class="settings-action">新しいタブを開く</button>
+          <button id="openDownloads" class="settings-action">ダウンロードを表示</button>
+          <button id="openCookies" class="settings-action">Cookieを管理</button>
+          <button id="openPass" class="settings-action">PassMenuを開く</button>
+        </div>
+      </section>
+
+      <section id="settings-appearance" class="settings-page">
+        <h1>外観</h1>
+        <div class="settings-card">
+          <h3>テーマ</h3>
+          <select id="themeSelect">
+            <option value="light">ライト</option>
+            <option value="dark">ダーク</option>
+          </select>
+        </div>
+        <div class="settings-card">
+          <h3>アクセントカラー</h3>
+          <input id="accentSelect" type="color" value="#6750A4">
+        </div>
+      </section>
+
+      <section id="settings-tweak" class="settings-page">
+        <h1>UI Tweak</h1>
+        <div class="settings-card">
+          <h3>角丸サイズ</h3>
+          <input id="cornerSelect" type="range" min="0" max="32" value="20">
+          <p class="muted">UIの角の丸みを変更します。（一部の変更内容は再起動して適用）</p>
+        </div>
+        <div class="settings-card">
+          <h3>サイドバー幅</h3>
+          <input id="sidebarWidth" type="range" min="160" max="320" value="210">
+          <p class="muted">サイドバーの幅を調整します。（再起動して適用）</p>
+        </div>
+      </section>
+
+      <section id="settings-privacy" class="settings-page">
+        <h1>プライバシー</h1>
+        <div class="settings-card">
+          <h3>保存データ</h3>
+          <p>Cookieやサイトデータ、パスワードなどを管理できます。</p>
+          <button id="clearCookies" class="settings-action">Cookieを削除</button>
+          <button id="clearCache" class="settings-action">キャッシュを削除</button>
+          <button id="clearHistory" class="settings-action">履歴を削除</button>
+          <button id="clearPass" class="settings-action">PassMenuを削除</button>
+        </div>
+      </section>
+
+      <section id="settings-erase" class="settings-page">
+        <h1>データ削除</h1>
+        <div class="settings-card">
+          <h3>削除するデータを選択</h3>
+          <label class="check-row"><input type="checkbox" id="eraseCookies"> Cookie</label>
+          <label class="check-row"><input type="checkbox" id="eraseCache"> キャッシュ</label>
+          <label class="check-row"><input type="checkbox" id="eraseStorage"> サイトデータ</label>
+          <label class="check-row"><input type="checkbox" id="eraseHistory"> 履歴</label>
+          <label class="check-row"><input type="checkbox" id="erasePass"> PassMenu</label>
+          <button id="eraseAll" class="settings-action danger">選択したデータを削除</button>
+        </div>
+      </section>
+
+      <section id="settings-about" class="settings-page">
+        <h1>Strya Browser</h1>
+        <div class="settings-card about-card">
+          <div class="about-logo">S</div>
+          <h2>Strya Browser</h2>
+          <p>Version 0.1.0</p>
+          <p class="muted">StryaOS ブラウザ Created by StryaTeam</p>
+          <button id="openDevtools" class="settings-action">開発者ツールを開く</button>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- Menu window -->
+<div id="menuWindowUI" class="hidden">
+  <header class="menu-window-header">
+    <div class="menu-window-brand">
+      <span class="logo">S</span>
+      <strong>Strya Browser</strong>
+    </div>
+    <button id="menuWindowClose" class="menu-window-close" title="閉じる">×</button>
+  </header>
+
+  <div class="menu-window-content">
+    <button class="menu-window-item" data-menu-action="bookmarks">☆ <span>ブックマーク</span></button>
+    <button class="menu-window-item" data-menu-action="history">◷ <span>履歴</span></button>
+    <button class="menu-window-item" data-menu-action="downloads">↓ <span>ダウンロード</span></button>
+    <button class="menu-window-item" data-menu-action="cookies">◉ <span>Cookie</span></button>
+    <button class="menu-window-item" data-menu-action="passmenu">🗝 <span>PassMenu</span></button>
+
+    <div class="menu-window-divider"></div>
+
+    <button class="menu-window-item" data-menu-action="private">◉ <span>プライベートタブを開く</span></button>
+    <button class="menu-window-item" data-menu-action="settings">⚙ <span>設定</span></button>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script src="renderer.js"></script>
+</body>
+</html>

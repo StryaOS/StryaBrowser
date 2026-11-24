@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Strya Browser</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header id="titlebar"><div class="brand"><span class="logo">S</span><span>Strya Browser</span></div><div class="drag"></div><div class="window-controls"><button id="minimize" title="最小化">−</button><button id="maximize" title="最大化 / 復元">□</button><button id="closeWindow" title="閉じる">×</button></div></header>
+<div id="browserUI">
+<div class="tabrow"><div id="tabs"></div><button id="addTab" class="tab-add" title="新しいタブ">＋</button></div>
+<nav class="toolbar"><button id="back" title="戻る">←</button><button id="forward" title="進む">→</button><button id="reload" title="再読み込み">⟳</button><button id="home" title="ホーム">⌂</button><input id="address" placeholder="検索またはURLを入力" autocomplete="off"><button id="go" class="go">→</button><button id="menu" title="メニュー">⋮</button></nav>
+<div id="bookmarkBar"><button data-panel="bookmarks">☆ ブックマーク</button><span class="bar-spacer"></span><button data-tool="passmenu">🔑 PassMenu</button><button data-tool="cookies">🍪 Cookie</button><button data-tool="settings">⚙ 設定</button></div>
+</div>
+<aside id="sidebar"><button data-panel="home">⌂　ホーム</button><button data-panel="bookmarks">☆　ブックマーク</button><button data-panel="history">◷　履歴</button><button data-tool="passmenu">🔑　PassMenu</button><button data-tool="cookies">🍪　Cookie</button><button data-tool="settings">⚙　設定</button><button id="eraseLink">🗑　データ削除</button><div class="side-bottom">Strya Browser 0.3.0</div></aside>
+<main><section id="startPage"><div class="welcome"><div class="biglogo">S</div><h1>Hello, Strya.</h1><p>Your web, your way.</p><div class="searchbox"><input id="startSearch" placeholder="Webを検索..." autocomplete="off"><button id="searchButton" class="primary">検索</button></div></div></section><section id="panel" hidden><div class="panel-inner"><div id="panelContent"></div></div></section></main><div id="toast"></div>
+<script src="renderer.js"></script></body></html>

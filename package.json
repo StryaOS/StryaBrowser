@@ -1,0 +1,41 @@
+{
+  "name": "strya-browser",
+  "version": "0.1.0",
+  "description": "Strya Browser",
+  "homepage": "https://github.com/exfat-dev3/strya-browser",
+  "author": "maron <maron@example.com>",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:deb": "electron-builder --linux deb"
+  },
+  "build": {
+    "appId": "com.maron.stryabrowser",
+    "productName": "StryaBrowser",
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*"
+    ],
+    "linux": {
+      "target": [
+        "deb"
+      ],
+      "maintainer": "maron <mamemame31000@gmail.com>",
+      "icon": "build/icons",
+      "category": "Network;WebBrowser;"
+    },
+    "deb": {
+      "depends": [
+        "libgtk-3-0",
+        "libnotify4",
+        "libnss3",
+        "libxss1",
+        "libxtst6",
+        "xdg-utils",
+        "libatspi2.0-0",
+        "libuuid1"
+      ]
+    }
+  }
+}
